@@ -1,0 +1,4 @@
+backend/src/.env
+backend/src/.venv
+__pycache__
+backend/src/.python-version
