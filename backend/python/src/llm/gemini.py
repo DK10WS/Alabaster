@@ -1,5 +1,5 @@
 import os
-from typing import cast
+from typing import Any, cast
 
 from dotenv import load_dotenv
 from fastapi import APIRouter
@@ -9,7 +9,7 @@ from langgraph.checkpoint.memory import InMemorySaver
 from langgraph.graph import END, START
 from langgraph.graph.state import StateGraph
 
-from llm.langraph_model import State
+from llm.langraph_model import AgentState
 from model import gemini_request
 
 # setup router
@@ -24,13 +24,15 @@ if not API:
 
 # Setup gemini as baseModel
 model = init_chat_model("gemini-2.5-flash", model_provider="google_genai")
-graph_builder = StateGraph(State)
+graph_builder = StateGraph(AgentState)
 
 
-def chatbot(state: State):
+def chatbot(state: AgentState) -> dict:
     """
     Helper function to return conversation between human and AI,
     Also adds conversation to the sate.
+
+    Agenstate(message: Annotated[list, add_messages])
     """
 
     response = model.invoke(state["message"])
@@ -44,7 +46,7 @@ memory = InMemorySaver()
 graph = graph_builder.compile(checkpointer=memory)
 
 
-def stream_graph_updates(user_input: str) -> dict[str, str] | None:
+def stream_graph_updates(user_input: str) -> dict[str, Any]:
     """
     Function to fetch results from the state and configure for a specific user
     to remeber converstion
@@ -56,11 +58,12 @@ def stream_graph_updates(user_input: str) -> dict[str, str] | None:
         {"message": [{"role": "user", "content": user_input}]}, config
     ):
         for value in event.values():
-            return {"Assistant": value["message"][-1]}
+            if not value:
+                return {"Assistant": value["message"][-1]}
 
 
 @app.post("/askgemini")  # This would later be a web socket
 def ask_gemini(input: gemini_request):
     response = stream_graph_updates(input.body)
-    if response != None:
+    if not response:
         return response["Assistant"].content
