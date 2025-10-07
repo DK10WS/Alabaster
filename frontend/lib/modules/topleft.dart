@@ -5,7 +5,7 @@ import 'package:flutter_analog_clock/flutter_analog_clock.dart';
 Widget clock1(BuildContext context) {
   return Container(
     decoration: BoxDecoration(
-      color: Colors.black.withOpacity(0.2),
+      color: Colors.black.withOpacity(0.7),
       borderRadius: BorderRadius.circular(20),
       border: Border.all(color: Colors.transparent, width: 2),
     ),

@@ -2,6 +2,7 @@ import 'package:alabaster/modules/bottomleft.dart';
 import 'package:alabaster/modules/middleleft.dart';
 import 'package:alabaster/modules/topleft.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/gestures.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -69,17 +70,25 @@ class _HomepageState extends State<Homepage> {
                 child: SizedBox(
                   height: MediaQuery.of(context).size.height * 0.76,
                   width: MediaQuery.of(context).size.width * 0.5,
-                  child: PageView.builder(
-                    controller: topleftController,
-                    onPageChanged: (index) {
-                      setState(() {
-                        topleftPage = index % topleftWidgets.length;
-                      });
-                    },
-                    itemBuilder: (context, index) {
-                      final circularIndex = index % topleftWidgets.length;
-                      return topleftWidgets[circularIndex];
-                    },
+                  child: ScrollConfiguration(
+                    behavior: ScrollConfiguration.of(context).copyWith(
+                      dragDevices: {
+                        PointerDeviceKind.touch,
+                        PointerDeviceKind.mouse,
+                      },
+                    ),
+                    child: PageView.builder(
+                      controller: topleftController,
+                      onPageChanged: (index) {
+                        setState(() {
+                          topleftPage = index % topleftWidgets.length;
+                        });
+                      },
+                      itemBuilder: (context, index) {
+                        final circularIndex = index % topleftWidgets.length;
+                        return topleftWidgets[circularIndex];
+                      },
+                    ),
                   ),
                 ),
               ),
@@ -90,7 +99,13 @@ class _HomepageState extends State<Homepage> {
                 child: SizedBox(
                   height: MediaQuery.of(context).size.height * 0.1,
                   width: MediaQuery.of(context).size.width * 0.5,
-                  child: SizedBox(
+                  child: ScrollConfiguration(
+                    behavior: ScrollConfiguration.of(context).copyWith(
+                      dragDevices: {
+                        PointerDeviceKind.touch,
+                        PointerDeviceKind.mouse,
+                      },
+                    ),
                     child: PageView.builder(
                       controller: middleleftController,
                       onPageChanged: (index) {
@@ -113,7 +128,13 @@ class _HomepageState extends State<Homepage> {
                 child: SizedBox(
                   height: MediaQuery.of(context).size.height * 0.1,
                   width: MediaQuery.of(context).size.width * 0.5,
-                  child: SizedBox(
+                  child: ScrollConfiguration(
+                    behavior: ScrollConfiguration.of(context).copyWith(
+                      dragDevices: {
+                        PointerDeviceKind.touch,
+                        PointerDeviceKind.mouse,
+                      },
+                    ),
                     child: PageView.builder(
                       controller: bottomleftController,
                       onPageChanged: (index) {

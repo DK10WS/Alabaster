@@ -32,7 +32,7 @@ Widget date() {
   return Container(
     alignment: Alignment.center,
     decoration: BoxDecoration(
-      color: Colors.black.withOpacity(0.2),
+      color: Colors.black.withOpacity(0.7),
       borderRadius: BorderRadius.circular(20),
       border: Border.all(color: Colors.transparent),
     ),

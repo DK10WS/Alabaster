@@ -6,7 +6,7 @@ Widget digital_clock1(BuildContext context) {
   String city = DigitalClockConfig().city;
   return Container(
     decoration: BoxDecoration(
-      color: Colors.black.withOpacity(0.2),
+      color: Colors.black.withOpacity(0.7),
       borderRadius: BorderRadius.circular(20),
       border: Border.all(color: Colors.transparent),
     ),
@@ -42,7 +42,7 @@ Widget digital_clock1(BuildContext context) {
 Widget digital_clock2(BuildContext context) {
   return Container(
     decoration: BoxDecoration(
-      color: Colors.black.withOpacity(0.2),
+      color: Colors.black.withOpacity(0.7),
       borderRadius: BorderRadius.circular(20),
       border: Border.all(color: Colors.transparent),
     ),

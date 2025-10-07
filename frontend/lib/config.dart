@@ -4,7 +4,7 @@ import 'package:timezone/timezone.dart' as tz;
 class AnalogClockConfig {
   // Analog Clock
   DateTime time = DateTime.now();
-  Color? hourHandColor = Colors.purple[900];
+  Color? hourHandColor = const Color.fromARGB(255, 1, 255, 56);
   Color? minuteHandColor = Colors.cyan;
   Color? secondHandColor = Colors.yellow;
   Color? hourNumberColor = Colors.white;
