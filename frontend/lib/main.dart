@@ -1,4 +1,4 @@
-import 'package:alabaster/Clock/clock.dart';
+import 'package:alabaster/pages/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:timezone/data/latest.dart' as tz;
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: ClockScreen(),
+      home: Homepage(),
     );
   }
 }

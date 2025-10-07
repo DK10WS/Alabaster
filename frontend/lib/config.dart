@@ -1,8 +1,14 @@
+import 'package:flutter/material.dart';
 import 'package:timezone/timezone.dart' as tz;
 
 class AnalogClockConfig {
   // Analog Clock
-  bool showDigitalClock = true; // Inside the analog clock
+  DateTime time = DateTime.now();
+  Color? hourHandColor = Colors.purple[900];
+  Color? minuteHandColor = Colors.cyan;
+  Color? secondHandColor = Colors.yellow;
+  Color? hourNumberColor = Colors.white;
+  Color? centerPointColor = Colors.yellow;
 }
 
 class DigitalClockConfig {
@@ -13,5 +19,5 @@ class DigitalClockConfig {
   late final location = tz.getLocation('$continent/$city');
   late final time = tz.TZDateTime.now(
     location,
-  ); // If you want systemtime change this line to `DateTime.now()`
+  ); // If you want system time change this line to `DateTime.now()`
 }
