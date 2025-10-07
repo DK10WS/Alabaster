@@ -1,8 +1,11 @@
 import 'package:alabaster/Clock/clock.dart';
 import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
+import 'package:timezone/data/latest.dart' as tz;
 
 Future<void> main() async {
+  tz.initializeTimeZones();
+
   WidgetsFlutterBinding.ensureInitialized();
 
   await windowManager.ensureInitialized();

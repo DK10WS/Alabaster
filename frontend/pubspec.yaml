@@ -40,6 +40,7 @@ dependencies:
   dio: ^5.9.0
   http: ^1.5.0
   one_clock: ^2.0.2
+  timezone: ^0.10.1
 
 dev_dependencies:
   flutter_test:
