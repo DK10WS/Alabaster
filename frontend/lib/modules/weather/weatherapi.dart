@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:weather/weather.dart';
 import 'package:http/http.dart' as http;
 
@@ -37,8 +36,7 @@ Future<Map<String, double>?> getlocation() async {
 }
 
 Future<Weather?> weatherReport() async {
-  final apiKey = dotenv.env['WEATHERAPI'].toString();
-  WeatherFactory wf = WeatherFactory(apiKey);
+  WeatherFactory wf = WeatherFactory("");
   try {
     final location = await getlocation();
     if (location != null) {
