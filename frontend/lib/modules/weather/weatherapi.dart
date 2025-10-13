@@ -44,7 +44,6 @@ Future<Weather?> weatherReport() async {
     if (location != null) {
       final lat = location['lat'];
       final lon = location['lon'];
-      print("${lat}, ${lon}");
       Weather w = await wf.currentWeatherByLocation(lat!, lon!);
       return w;
     }
