@@ -42,7 +42,11 @@ Widget date() {
         fit: BoxFit.scaleDown,
         child: Text(
           "$dayName, $formattedDate",
-          style: const TextStyle(color: Colors.white, fontSize: 100),
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 100,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     ),

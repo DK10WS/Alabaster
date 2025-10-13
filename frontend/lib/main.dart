@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:alabaster/pages/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:timezone/data/latest.dart' as tz;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 Future<void> main() async {
   tz.initializeTimeZones();
@@ -16,6 +19,8 @@ Future<void> main() async {
     await windowManager.show();
     await windowManager.focus();
   });
+  String envPath = '${Directory.current.path}/.env';
+  await dotenv.load(fileName: envPath);
 
   runApp(MyApp());
 }
