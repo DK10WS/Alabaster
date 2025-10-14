@@ -11,20 +11,30 @@ class WeatherWidget extends StatefulWidget {
 }
 
 class _WeatherWidgetState extends State<WeatherWidget> {
+  static Weather? cachedWeather;
+  static DateTime? lastFetchTime;
+
   late Future<Weather?> _weatherFuture;
 
   @override
   void initState() {
     super.initState();
-    _weatherFuture = weatherReport();
+    _weatherFuture = getWeather();
+  }
 
-    Timer.periodic(const Duration(minutes: 20), (timer) {
-      if (mounted) {
-        setState(() {
-          _weatherFuture = weatherReport();
-        });
-      }
-    });
+  Future<Weather?> getWeather() async {
+    // Check if we fetched less than 20 mins ago
+    if (cachedWeather != null &&
+        lastFetchTime != null &&
+        DateTime.now().difference(lastFetchTime!) <
+            const Duration(minutes: 20)) {
+      return cachedWeather;
+    }
+
+    final data = await weatherReport();
+    cachedWeather = data;
+    lastFetchTime = DateTime.now();
+    return data;
   }
 
   @override

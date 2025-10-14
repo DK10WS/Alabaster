@@ -10,7 +10,6 @@ Future<Map<String, double>?> getlocation() async {
   if (cachedLocation != null) {
     return cachedLocation;
   }
-
   final response = await http.get(
     Uri.parse("https://ipapi.co/json/"),
     headers: {

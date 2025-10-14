@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:alabaster/modules/bottomleft.dart';
 import 'package:alabaster/modules/fourthWidget.dart';
 import 'package:alabaster/modules/middleleft.dart';
@@ -17,6 +19,7 @@ class _HomepageState extends State<Homepage> {
   late PageController middleleftController;
   late PageController bottomleftController;
   late PageController toprightController;
+  Timer? _autoRotateTimer;
 
   int topleftPage = 0;
   int middleleftpage = 0;
@@ -31,7 +34,7 @@ class _HomepageState extends State<Homepage> {
   ];
 
   List<Widget> bottomleft(BuildContext context) => [date()];
-  List<Widget> topright(BuildContext context) => [weather()];
+  List<Widget> topright(BuildContext context) => [forecast(), weather()];
 
   @override
   void initState() {
@@ -40,10 +43,22 @@ class _HomepageState extends State<Homepage> {
     middleleftController = PageController(initialPage: 1000);
     bottomleftController = PageController(initialPage: 1000);
     toprightController = PageController(initialPage: 1000);
+
+    _autoRotateTimer = Timer.periodic(const Duration(seconds: 20), (timer) {
+      if (toprightController.hasClients) {
+        final nextPage = (toprightController.page?.toInt() ?? 0) + 1;
+        toprightController.animateToPage(
+          nextPage,
+          duration: const Duration(milliseconds: 200),
+          curve: Curves.easeInOut,
+        );
+      }
+    });
   }
 
   @override
   void dispose() {
+    _autoRotateTimer?.cancel();
     topleftController.dispose();
     middleleftController.dispose();
     bottomleftController.dispose();
